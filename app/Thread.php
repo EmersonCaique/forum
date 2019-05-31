@@ -10,4 +10,14 @@ class Thread extends Model
     {
         return $this->hasMany('App\Reply');
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function addReply(Reply $reply)
+    {
+        $this->replies()->save($reply);
+    }
 }
