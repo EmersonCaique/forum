@@ -42,7 +42,7 @@
             <form action="{{ route('thread.replies.store', ['thread' => $thread->id ]) }}" method="post">
                 @csrf
                 <textarea type="text" name="body" placeholder="New reply..." rows="3"
-                    class="w-full focus:border-none" required></textarea>
+                    class="w-full focus:border-none border rounded px-3 py-3" required></textarea>
                 <button type="submit"
                     class="px-12 py-2 bg-blue-500 rounded shadow text-white text-right mt-4">Reply</button>
             </form>

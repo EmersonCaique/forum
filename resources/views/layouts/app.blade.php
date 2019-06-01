@@ -22,9 +22,13 @@
 <body class="bg-gray-100">
     <div id="app">
         <nav class="flex bg-white shadow justify-between p-4 p-2">
+            <div>
                 <a href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+
+            <a href="{{ route('thread.index') }}" class="ml-5">All Threads</a>
+            </div>
 
                 <div>
                     <!-- Right Side Of Navbar -->

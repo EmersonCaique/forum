@@ -21,7 +21,10 @@
     </div>
 
     @empty
-    <p>There are no relevant results at this time.</p>
+    <div class="w-full  mt-10 text-center">
+        <p class="block mb-8">There are no relevant results at this time.</p>
+        <a href="{{ route('thread.create') }}" class="px-6 py-3 bg-green-300 mt-8 shadow rounded text-white">New Thread</a>
+    </div>
     @endforelse
 </div>
 @endsection
