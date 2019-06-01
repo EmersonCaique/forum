@@ -21,7 +21,7 @@ class ReadThreadTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_a_single_thread()
+    public function a_user_can_view_a_single_thread()
     {
         $thread = factory('App\Thread')->create();
 

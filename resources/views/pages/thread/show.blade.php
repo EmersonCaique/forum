@@ -1,7 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="w-full p-5 bg-white mb-2 mr-2 shadow rounded">
+    <div class="card">
+        <div class="mb-3">
+            <h4>
+                <a href="{{ route('thread.show', ['thread' => $thread->id ]) }}">
+                    <strong>
+                        {{ $thread->title }}
+                    </strong>
+                </a>
+            </h4>
+        </div>
+        <div>
+            <span class="italic">{{ $thread->body }}</li>
+        </div>
+    </div>
+</div>
+
 <div class="flex flex-wrap">
+
+
     @forelse ($thread->replies as $reply)
     <div class="w-full p-5 bg-white mb-2 mr-2 rounded border">
         <div class="mb-2 border-b pb-2">
