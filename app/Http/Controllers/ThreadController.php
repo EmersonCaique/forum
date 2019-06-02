@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Thread;
-use Illuminate\Http\Request;
 use App\Channel;
+use Illuminate\Http\Request;
 use App\Http\Requests\ThreadRequest;
 
 class ThreadController extends Controller
@@ -14,12 +14,7 @@ class ThreadController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Channel $channel)
     {
         $threads = Thread::all();
 
@@ -59,7 +54,7 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Channel $slug, Thread $thread)
+    public function show(Channel $channel, Thread $thread)
     {
         return view('pages.thread.show', compact('thread'));
     }

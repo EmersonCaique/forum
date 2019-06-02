@@ -16,14 +16,14 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::resource('thread', 'ThreadController');
-Route::get('thread', 'ThreadController@index');
-Route::get('thread/{slug}/{thread}', 'ThreadController@show');
+Route::get('thread', 'ThreadController@index')->name('thread');
+Route::get('thread/create', 'ThreadController@create')->name('thread.create');
+Route::get('thread/{channel}/{thread}', 'ThreadController@show');
+Route::patch('thread/{channel}/{thread}', 'ThreadController@update');
+Route::delete('thread/{channel}/{thread}', 'ThreadController@destroy');
 Route::post('thread', 'ThreadController@store');
+Route::get('thread/{channel}', 'ThreadController@index');
 
-Route::get('thread/{slug}/{thread}/replies', 'ThreadReplyController@show');
-Route::post('thread/{slug}/{thread}/replies', 'ThreadReplyController@store');
-
-// Route::resource('thread.replies', 'ThreadReplyController');
+Route::get('/thread/{channel}/{thread}/replies', 'ThreadController@show');
+Route::post('/thread/{channel}/{thread}/replies', 'ThreadReplyController@store');

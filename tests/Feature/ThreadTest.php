@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Channel;
 
 class ThreadTest extends TestCase
 {
@@ -11,7 +10,6 @@ class ThreadTest extends TestCase
     public function guest_may_not_create_thread()
     {
         $thread = raw('App\Thread');
-        $channel = Channel::find($thread['channel_id']);
 
         $this
             ->post('thread', $thread)

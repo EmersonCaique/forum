@@ -7,7 +7,7 @@
         <div class="card">
             <div class="mb-3">
                 <h4>
-                <a href="thread/{{$thread->channel->slug }}/{{ $thread->id}}">
+                    <a href="thread/{{$thread->channel->slug }}/{{ $thread->id}}">
                         <strong>
                             {{ $thread->title }}
                         </strong>
@@ -23,7 +23,8 @@
     @empty
     <div class="w-full  mt-10 text-center">
         <p class="block mb-8">There are no relevant results at this time.</p>
-        <a href="{{ route('thread.create') }}" class="px-6 py-3 bg-green-300 mt-8 shadow rounded text-white">New Thread</a>
+        <a href="{{ url('thread/create') }}" class="px-6 py-3 bg-green-300 mt-8 shadow rounded text-white">New
+            Thread</a>
     </div>
     @endforelse
 </div>

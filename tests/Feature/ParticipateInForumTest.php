@@ -13,7 +13,6 @@ class ParticipateInForumTest extends TestCase
     public function an_auth_user_may_participate_in_forum_threads()
     {
         $this->signIn($user = create('App\User'));
-        $this->withoutExceptionHandling();
 
         $thread = create('App\Thread');
         $reply = raw('App\Reply');
