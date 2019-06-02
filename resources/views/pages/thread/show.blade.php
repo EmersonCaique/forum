@@ -5,7 +5,7 @@
     <div class="card">
         <div class="mb-3">
             <h4>
-                <a href="{{ route('thread.show', ['thread' => $thread->id ]) }}">
+            <a href="/thread/{{$thread->slug}}/{{$thread->title}}">
                     <strong>
                         {{ $thread->title }}
                     </strong>
@@ -39,7 +39,7 @@
 
     @auth
         <div class="w-full p-5 bg-white mb-2 mr-2 border rounded text-right">
-            <form action="{{ route('thread.replies.store', ['thread' => $thread->id ]) }}" method="post">
+        <form action="thread/{{$thread->channel->slug}}/{{ $thread->id}}/replies" method="post">
                 @csrf
                 <textarea type="text" name="body" placeholder="New reply..." rows="3"
                     class="w-full focus:border-none border rounded px-3 py-3" required></textarea>

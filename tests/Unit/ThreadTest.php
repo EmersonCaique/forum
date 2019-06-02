@@ -17,4 +17,12 @@ class ThreadTest extends TestCase
 
         $this->assertInstanceOf(User::class, $thread->owner);
     }
+
+    /** @test */
+    public function a_thread_belogns_to_a_channel()
+    {
+        $thread = create('App\Thread');
+
+        $this->assertInstanceOf('App\Channel', $thread->channel);
+    }
 }

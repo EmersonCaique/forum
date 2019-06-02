@@ -7,7 +7,7 @@
         <div class="card">
             <div class="mb-3">
                 <h4>
-                    <a href="{{ route('thread.show', ['thread' => $thread->id ]) }}">
+                <a href="thread/{{$thread->channel->slug }}/{{ $thread->id}}">
                         <strong>
                             {{ $thread->title }}
                         </strong>

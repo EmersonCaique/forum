@@ -27,7 +27,7 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
 
-            <a href="{{ route('thread.index') }}" class="ml-5">All Threads</a>
+            <a href="" class="ml-5">All Threads</a>
             </div>
 
                 <div>

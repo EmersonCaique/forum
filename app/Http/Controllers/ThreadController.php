@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Thread;
 use Illuminate\Http\Request;
+use App\Channel;
+use App\Http\Requests\ThreadRequest;
 
 class ThreadController extends Controller
 {
@@ -19,7 +21,7 @@ class ThreadController extends Controller
      */
     public function index()
     {
-        $threads = Thread::latest()->get();
+        $threads = Thread::all();
 
         return view('pages.thread.index', compact('threads'));
     }
@@ -41,7 +43,7 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ThreadRequest $request)
     {
         $thread = new Thread();
         $thread->fill($request->all());
@@ -57,7 +59,7 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Thread $thread)
+    public function show(Channel $slug, Thread $thread)
     {
         return view('pages.thread.show', compact('thread'));
     }

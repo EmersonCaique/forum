@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body', 'channel_id'];
 
     public function replies()
     {
@@ -21,5 +21,10 @@ class Thread extends Model
     public function addReply(Reply $reply)
     {
         $this->replies()->save($reply);
+    }
+
+    public function channel()
+    {
+        return $this->belongsTo(Channel::class);
     }
 }
