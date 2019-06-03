@@ -29,13 +29,12 @@
         </div>
 
     @endauth
-    <div class="w-full  mt-10 text-center">
-            <p class="block mb-8">Register for create threads...</p>
-            <a  href="{{ route('register') }}"  class="px-6 py-3 bg-green-300 mt-8 shadow rounded text-white">New Account</a>
-
-        </div>
     @guest
+        <div class="w-full  mt-10 text-center">
+                <p class="block mb-8">Register for create threads...</p>
+                <a  href="{{ route('register') }}"  class="px-6 py-3 bg-green-300 mt-8 shadow rounded text-white">New Account</a>
 
+            </div>
     @endguest
     @endforelse
 </div>

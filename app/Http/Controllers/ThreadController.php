@@ -6,7 +6,7 @@ use App\Thread;
 use App\Channel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ThreadRequest;
-use App\User;
+use App\Filters\ThreadFilter;
 
 class ThreadController extends Controller
 {
@@ -15,17 +15,12 @@ class ThreadController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index(Channel $channel)
+    public function index(Channel $channel, ThreadFilter $filters)
     {
+        $threads = Thread::latest()->filter($filters);
+
         if ($channel->exists) {
             $threads = $channel->threads()->latest();
-        } else {
-            $threads = Thread::latest();
-        }
-
-        if ($username = request('by')) {
-            $username = User::where('name', $username)->firstOrFail();
-            $threads->where('user_id', $username->id);
         }
 
         $threads = $threads->get();
