@@ -6,6 +6,7 @@ use App\Thread;
 use App\Channel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ThreadRequest;
+use App\User;
 
 class ThreadController extends Controller
 {
@@ -16,7 +17,18 @@ class ThreadController extends Controller
 
     public function index(Channel $channel)
     {
-        $threads = Thread::all();
+        if ($channel->exists) {
+            $threads = $channel->threads()->latest();
+        } else {
+            $threads = Thread::latest();
+        }
+
+        if ($username = request('by')) {
+            $username = User::where('name', $username)->firstOrFail();
+            $threads->where('user_id', $username->id);
+        }
+
+        $threads = $threads->get();
 
         return view('pages.thread.index', compact('threads'));
     }

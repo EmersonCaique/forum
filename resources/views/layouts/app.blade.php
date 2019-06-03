@@ -23,38 +23,31 @@
 
 <body class="bg-gray-100">
     <div id="app">
-        <nav class="flex bg-white shadow justify-between p-4 p-2">
+        <nav class="flex bg-white shadow justify-between p-6">
             <div>
-                <a href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-
+                <a href="{{ url('/home') }}" class="uppercase">Forum</a>
                 <a href="{{ url('thread') }}" class="ml-5">All Threads</a>
-                <a href="{{ url('thread/create') }}" class="ml-5">New Thread</a>
+            </div>
 
+            @auth
+            <div>
+                <a href="{{ url('/thread?by='.auth()->user()->name) }}" class="ml-5">My Threads</a>
+                <a href="{{ url('/thread/create') }}" class="ml-5">New Thread</a>
             </div>
 
             <div>
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
-                    @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                    @endif
-                    @else
-                    <div>
-                        {{ Auth::user()->name }}
-
-                    </div>
-                    @endguest
-                </ul>
+            <span>{{ auth()->user()->name }}</span>
             </div>
+
+            @endauth
+
+            @guest
+            <div>
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                <a class="nav-link ml-4" href="{{ route('register') }}">{{ __('Register') }}</a>
+            </div>
+            @endguest
+
         </nav>
 
         <main class="container py-4 mx-auto ">
