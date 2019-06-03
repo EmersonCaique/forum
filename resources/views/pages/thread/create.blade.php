@@ -7,10 +7,10 @@
             @csrf
 
             <div class="text-left mb-4">
-                <label for="" class="block">Channel</label>
+                <label for="" class="block mb-2">Channel</label>
                 <select name="channel_id" class="w-full border rounded  px-2 py-2" required>
                     <option value="">Chose one...</option>
-                    @forelse (App\Channel::all() as $channel)
+                    @forelse ($channels as $channel)
                         <option value="{{ $channel->id }}" {{ old('channel_id') == $channel->id ? 'selected' : ''  }}>{{ $channel->description }}</option>
                     @empty
 
