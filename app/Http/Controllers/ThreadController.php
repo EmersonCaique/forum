@@ -17,13 +17,17 @@ class ThreadController extends Controller
 
     public function index(Channel $channel, ThreadFilter $filters)
     {
-        $threads = Thread::latest()->filter($filters);
+        $threads = Thread::filter($filters)->latest();
 
         if ($channel->exists) {
             $threads = $channel->threads()->latest();
         }
 
         $threads = $threads->get();
+
+        if (request()->wantsJson()) {
+            return $threads;
+        }
 
         return view('pages.thread.index', compact('threads'));
     }

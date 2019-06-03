@@ -3,7 +3,7 @@
 @section('content')
 <div class="flex flex-wrap">
     @forelse ($threads as $thread)
-    <div class="w-1/4 p-5 bg-white mb-2 mr-2 shadow rounded">
+    <div class="w-full p-5 bg-white mb-2 mr-2 justify-between shadow rounded">
         <div class="card">
             <div class="mb-3">
                 <h4>
@@ -16,6 +16,9 @@
             </div>
             <div>
                 <span class="italic">{{ $thread->body }}</li>
+            </div>
+            <div class="text-right mt-2">
+            <span  class="text-muted">{{ $thread->replies_count }} {{ str_plural('reply',  $thread->replies_count) }}</span >
             </div>
         </div>
     </div>

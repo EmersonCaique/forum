@@ -1,16 +1,16 @@
 <?php
 
-function create($class, $attrbiutes = [])
+function create($class, $attrbiutes = [], $times = null)
 {
-    return factory($class)->create($attrbiutes);
+    return factory($class, $times)->create($attrbiutes);
 }
 
-function make($class, $attrbiutes = [])
+function make($class, $attrbiutes = [], $times = null)
 {
-    return factory($class)->make($attrbiutes);
+    return factory($class, $times)->make($attrbiutes);
 }
 
-function raw($class, $attrbiutes = [])
+function raw($class, $attrbiutes = [], $times = null)
 {
-    return factory($class)->raw($attrbiutes);
+    return factory($class, $times)->raw($attrbiutes);
 }
