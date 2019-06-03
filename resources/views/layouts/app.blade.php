@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body class="bg-gray-100">
     <div id="app">
         <nav class="flex bg-white shadow justify-between p-4 p-2">
@@ -27,30 +29,32 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
 
-            <a href="" class="ml-5">All Threads</a>
+                <a href="{{ url('thread') }}" class="ml-5">All Threads</a>
+                <a href="{{ url('thread/create') }}" class="ml-5">New Thread</a>
+
             </div>
 
-                <div>
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                        <div>
-                                {{ Auth::user()->name }}
+            <div>
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                    @endif
+                    @else
+                    <div>
+                        {{ Auth::user()->name }}
 
-                        </div>
-                        @endguest
-                    </ul>
-                </div>
+                    </div>
+                    @endguest
+                </ul>
+            </div>
         </nav>
 
         <main class="container py-4 mx-auto ">
@@ -58,4 +62,5 @@
         </main>
     </div>
 </body>
+
 </html>

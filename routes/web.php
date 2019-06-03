@@ -26,4 +26,4 @@ Route::post('thread', 'ThreadController@store');
 Route::get('thread/{channel}', 'ThreadController@index');
 
 Route::get('/thread/{channel}/{thread}/replies', 'ThreadController@show');
-Route::post('/thread/{channel}/{thread}/replies', 'ThreadReplyController@store');
+Route::post('/thread/{channel}/{thread}/replies', 'ThreadReplyController@store')->name('thread.replies.store');

@@ -33,7 +33,8 @@ class ThreadRequest extends FormRequest
     public function messages()
     {
         return [
-            'channel_id.exists' => 'Channel must exists'
+            'channel_id.exists' => 'Channel must exists',
+            'channel_id.required' => 'Please chose a channel',
         ];
     }
 }

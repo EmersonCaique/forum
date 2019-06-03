@@ -44,7 +44,7 @@ class ThreadController extends Controller
         $thread->fill($request->all());
         $thread = auth()->user()->threads()->save($thread);
 
-        return back();
+        return redirect('thread');
     }
 
     /**

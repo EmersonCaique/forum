@@ -21,7 +21,7 @@
 <div class="flex flex-wrap">
 
 
-    @forelse ($thread->replies as $reply)
+    @foreach ($thread->replies as $reply)
     <div class="w-full p-5 bg-white mb-2 mr-2 rounded border">
         <div class="mb-2 border-b pb-2">
             <span>{{ $reply->owner->name }} said {{ $reply->created_at->diffForHumans() }}</span>
@@ -31,15 +31,10 @@
         </div>
     </div>
 
-    @empty
-    <div class="text-center w-full">
-        <p>There are no relevant results at this time.</p>
-    </div>
-    @endforelse
-
+    @endforeach
     @auth
         <div class="w-full p-5 bg-white mb-2 mr-2 border rounded text-right">
-        <form action="thread/{{$thread->channel->slug}}/{{ $thread->id}}/replies" method="post">
+        <form action="{{ route('thread.replies.store', ['channel' => $thread->channel->slug, 'thread' => $thread->id ] ) }}" method="post">
                 @csrf
                 <textarea type="text" name="body" placeholder="New reply..." rows="3"
                     class="w-full focus:border-none border rounded px-3 py-3" required></textarea>
