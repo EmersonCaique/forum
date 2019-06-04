@@ -5,7 +5,7 @@
     @forelse ($threads as $thread)
     <div class="w-full p-5 bg-white mb-2 mr-2 justify-between shadow rounded">
         <div class="card">
-            <div class="mb-3">
+            <div class="mb-3 border-b pb-5">
                 <h4>
                     <a href="thread/{{$thread->channel->slug }}/{{ $thread->id}}">
                         <strong>

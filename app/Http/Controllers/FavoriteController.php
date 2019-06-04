@@ -19,5 +19,7 @@ class FavoriteController extends Controller
         } catch (\Exception $e) {
             $this->fail('dont work');
         }
+
+        return back();
     }
 }
