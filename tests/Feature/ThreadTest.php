@@ -61,6 +61,44 @@ class ThreadTest extends TestCase
                   ->assertSessionHasErrors('channel_id', 'Channel must exists');
     }
 
+    /** @test */
+    public function guest_can_not_delete_thread()
+    {
+        $thread = create('App\Thread');
+
+        $this
+            ->delete("thread/{$thread->channel->slug}/{$thread->id}")
+            ->assertRedirect('/login');
+
+        $this->assertDatabaseHas('threads', [
+            'id' => $thread->id,
+            'body' => $thread->body,
+            'title' => $thread->title,
+        ]);
+    }
+
+    /** @test */
+    public function a_thread_can_be_deleted()
+    {
+        $this->signIn();
+        $thread = create('App\Thread');
+        $reply = create('App\Reply', ['thread_id' => $thread->id]);
+
+        $this
+            ->json('DELETE', "thread/{$thread->channel->slug}/{$thread->id}")
+            ->assertStatus(204);
+
+        $this->assertDatabaseMissing('threads', [
+            'id' => $thread->id,
+            'body' => $thread->body,
+            'title' => $thread->title,
+        ]);
+
+        $this->assertDatabaseMissing('replies', [
+            'id' => $reply->id,
+        ]);
+    }
+
     public function publishThread($overrides = [])
     {
         $this->signIn();

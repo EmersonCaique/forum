@@ -103,7 +103,14 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread)
+    public function destroy(Channel $channel, Thread $thread)
     {
+        $thread->delete();
+
+        if (request()->wantsJson()) {
+            return response()->json(null, 204);
+        }
+
+        return redirect('thread');
     }
 }

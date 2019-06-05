@@ -7,10 +7,14 @@
         <div class="card">
             <div class="mb-3 border-b pb-5">
                 <h4>
-                    <a href="thread/{{$thread->channel->slug }}/{{ $thread->id}}">
+                    <a href="profile/{{$thread->owner->name }}">
                         <strong>
-                            {{ $thread->title }}
+                            {{ $thread->owner->name }}
                         </strong>
+                    </a>
+                    posted:
+                    <a href="thread/{{$thread->channel->slug }}/{{ $thread->id}}">
+                            {{ $thread->title }}
                     </a>
                 </h4>
             </div>

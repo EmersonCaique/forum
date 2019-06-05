@@ -6,14 +6,18 @@
     <div class="flex-1">
         <div class=" p-5 bg-white mb-2 mr-2 shadow rounded">
             <div class="card">
-                <div class="mb-3">
-                    <h4>
-                        <a href="/thread/{{$thread->slug}}/{{$thread->title}}">
-                            <strong>
+                <div class="mb-3 flex">
+                    <h4 class="flex-1">
+                        <a href="/thread/{{$thread->slug}}/{{$thread->title}}" class="underline text-blue-400">
                                 {{ $thread->title }}
-                            </strong>
                         </a>
                     </h4>
+
+                    <form action="{{ url('thread/'.$thread->channel->slug.'/'.$thread->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="text-red-400 underline">Delete Thread</button>
+                    </form>
                 </div>
                 <div>
                     <span class="italic">{{ $thread->body }}</li>
@@ -59,7 +63,7 @@
         <div class="card">
             <p>
                 This thread was published {{ $thread->created_at->diffForHumans() }} by
-                <a href="#"><strong>{{ $thread->owner->name }}</strong> </a>, and currently
+                <a href="{{ url('profile/'.$thread->owner->name)}}"><strong>{{ $thread->owner->name }}</strong> </a>, and currently
                 has {{ $thread->replies_count }} {{ str_plural('comment',  $thread->replies_count) }}.
             </p>
         </div>
