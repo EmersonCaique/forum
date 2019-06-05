@@ -13,11 +13,13 @@
                         </a>
                     </h4>
 
-                    <form action="{{ url('thread/'.$thread->channel->slug.'/'.$thread->id) }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="text-red-400 underline">Delete Thread</button>
-                    </form>
+                    @can('update', $thread)
+                        <form action="{{ url('thread/'.$thread->channel->slug.'/'.$thread->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="text-red-400 underline">Delete Thread</button>
+                        </form>
+                    @endcan
                 </div>
                 <div>
                     <span class="italic">{{ $thread->body }}</li>
