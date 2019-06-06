@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\RecordActivity;
 
 class Thread extends Model
 {
-    protected $fillable = ['title', 'body', 'channel_id'];
+    protected $guarded = [];
+
+    use RecordActivity;
 
     public static function boot()
     {
