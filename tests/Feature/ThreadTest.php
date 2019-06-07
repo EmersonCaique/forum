@@ -99,6 +99,16 @@ class ThreadTest extends TestCase
         $this->assertDatabaseMissing('replies', [
             'id' => $reply->id,
         ]);
+
+        $this->assertDatabaseMissing('activities', [
+            'subject_id' => $thread->id,
+            'subject_type' => class_basename($thread),
+        ]);
+
+        $this->assertDatabaseMissing('activities', [
+            'subject_id' => $reply->id,
+            'subject_type' => class_basename($reply),
+        ]);
     }
 
     public function publishThread($overrides = [])

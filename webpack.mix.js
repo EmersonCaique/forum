@@ -6,3 +6,4 @@ mix.sass('resources/sass/app.scss', 'public/css')
     processCssUrls: false,
     postCss: [ tailwindcss('tailwind.config.js') ],
   })
+  .js('resources/js/app.js','public/js')

@@ -55,7 +55,7 @@ class ThreadController extends Controller
         $thread->fill($request->all());
         $thread = auth()->user()->threads()->save($thread);
 
-        return redirect('thread');
+        return redirect('thread')->with('message', 'Your thread has been published!');
     }
 
     /**

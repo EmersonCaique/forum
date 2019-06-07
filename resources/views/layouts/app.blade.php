@@ -52,7 +52,12 @@
         <main class="container py-4 mx-auto ">
             @yield('content')
         </main>
+
+
+        <flash message="{{ session('message') }}"></flash>
+
     </div>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
