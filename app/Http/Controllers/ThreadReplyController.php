@@ -74,8 +74,12 @@ class ThreadReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Thread $thread)
+    public function update(Request $request, Reply $reply)
     {
+        $this->authorize('update', $reply);
+
+        $reply->update($request->all());
+        $reply->save();
     }
 
     /**

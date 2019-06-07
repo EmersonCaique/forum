@@ -26,46 +26,28 @@
                 </div>
             </div>
         </div>
-
         <div class=" flex flex-wrap">
             @foreach ($replies as $reply)
-            <div class="w-full p-5 bg-white mb-2 mr-2 rounded border">
-                <div class="mb-2 border-b pb-2 flex justify-between items-center">
-                    <span>{{ $reply->owner->name }} said {{ $reply->created_at->diffForHumans() }}</span>
-                    <form action="{{ url('/reply/'.$reply->id.'/favorites')}}" method="post">
-                        @csrf
-                        <button type="submit"
-                            class="p-1 border border-blue-400 rounded  text-blue-400 text-xs">Favorite</button>
-                    </form>
-                </div>
-                <div class="mb-3">
-                    {{ $reply->body }}
-                </div>
-                @can('update', $reply)
-                    <form action="{{ route('reply.destroy', $reply ) }}" method="post">
-                        @method('delete')
-                        @csrf
-                        <button class="px-4 py-2 bg-red-400 text-white rounded mt-4">Delete</button>
-                    </form>
-                @endcan
-            </div>
+                @include('pages.thread.reply', ['reply' => $reply ])
             @endforeach
-
             {{ $replies->links() }}
-            @auth
-            <div class="w-full p-5 bg-white mb-2 mr-2 border rounded text-right">
-                <form
-                    action="{{ route('thread.replies.store', ['channel' => $thread->channel->slug, 'thread' => $thread->id ] ) }}"
-                    method="post">
-                    @csrf
-                    <textarea type="text" name="body" placeholder="New reply..." rows="3"
-                        class="w-full focus:border-none border rounded px-3 py-3" required></textarea>
-                    <button type="submit"
-                        class="px-12 py-2 bg-blue-500 rounded shadow text-white text-right mt-4">Reply</button>
-                </form>
-            </div>
-            @endauth
         </div>
+
+        @auth
+        <div class="w-full p-5 bg-white mb-2 mr-2 border rounded text-right">
+            <form
+                action="{{ route('thread.replies.store', ['channel' => $thread->channel->slug, 'thread' => $thread->id ] ) }}"
+                method="post">
+                @csrf
+                <textarea type="text" name="body" placeholder="New reply..." rows="3"
+                    class="w-full focus:border-none border rounded px-3 py-3" required></textarea>
+                <button type="submit"
+                    class="px-12 py-2 bg-blue-500 rounded shadow text-white text-right mt-4">Reply</button>
+            </form>
+        </div>
+        @endauth
+
+
     </div>
 
     <div class="w-1/4 p-5 bg-white mb-2 mr-2 shadow rounded">

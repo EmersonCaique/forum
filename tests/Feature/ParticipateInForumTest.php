@@ -62,4 +62,31 @@ class ParticipateInForumTest extends TestCase
                 ->delete("reply/{$reply->id}")
                 ->assertStatus(302);
     }
+
+    /** @test */
+    public function unauthorized_users_cannot_update_replies()
+    {
+        $reply = create('App\Reply');
+
+        $this
+             ->put("reply/{$reply->id}", ['body' => $body = 'works fine'])
+             ->assertStatus(403);
+
+        $this->signIn()
+             ->put("reply/{$reply->id}", ['body' => $body = 'works fine'])
+             ->assertStatus(403);
+    }
+
+    /** @test */
+    public function authorized_users_can_update_replies()
+    {
+        $reply = create('App\Reply');
+
+        $this->signIn($reply->owner)
+                  ->put("reply/{$reply->id}", ['body' => $body = 'works fine']);
+
+        $this->assertDatabaseHas('replies', [
+            'body' => $body,
+        ]);
+    }
 }
