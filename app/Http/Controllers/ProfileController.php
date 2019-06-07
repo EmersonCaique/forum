@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Activity;
 
 class ProfileController extends Controller
 {
     public function show(User $user)
     {
-        $activities = $user->activities()->latest()->with('subject')->get()->groupBy(function ($activity) {
-            return $activity->created_at->format('Y-m-d');
-        });
+        $activities = Activity::feed(auth()->user());
 
         return view('pages.profile.show', compact('user', 'activities'));
     }
