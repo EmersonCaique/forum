@@ -7,13 +7,13 @@
         <div class="card">
             <div class="mb-3 border-b pb-5">
                 <h4>
-                    <a href="profile/{{$thread->owner->name }}">
+                    <a href="profile/{{$thread->owner->name }}" class="text-blue-500">
                         <strong>
                             {{ $thread->owner->name }}
                         </strong>
                     </a>
                     posted:
-                    <a href="thread/{{$thread->channel->slug }}/{{ $thread->id}}">
+                    <a href="thread/{{$thread->channel->slug }}/{{ $thread->id}}" class="text-blue-500">
                             {{ $thread->title }}
                     </a>
                 </h4>
