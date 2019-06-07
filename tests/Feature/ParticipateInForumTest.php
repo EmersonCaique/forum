@@ -38,4 +38,28 @@ class ParticipateInForumTest extends TestCase
             ->post("thread/{$thread->channel->slug}/{$thread->id}/replies", $reply)
             ->assertSessionHasErrors('body');
     }
+
+    /** @test */
+    public function unauthorized_users_cannot_delete_replies()
+    {
+        $reply = create('App\Reply');
+
+        $this
+            ->delete("reply/{$reply->id}")
+            ->assertStatus(403);
+
+        $this->signIn()
+            ->delete("reply/{$reply->id}")
+            ->assertStatus(403);
+    }
+
+    /** @test */
+    public function authorized_users_can_delete_replies()
+    {
+        $reply = create('App\Reply');
+
+        $this->signIn($reply->owner)
+                ->delete("reply/{$reply->id}")
+                ->assertStatus(302);
+    }
 }

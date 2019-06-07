@@ -9,16 +9,16 @@
                 <div class="mb-3 flex">
                     <h4 class="flex-1">
                         <a href="/thread/{{$thread->slug}}/{{$thread->title}}" class="underline text-blue-400">
-                                {{ $thread->title }}
+                            {{ $thread->title }}
                         </a>
                     </h4>
 
                     @can('update', $thread)
-                        <form action="{{ url('thread/'.$thread->channel->slug.'/'.$thread->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="text-red-400 underline">Delete Thread</button>
-                        </form>
+                    <form action="{{ url('thread/'.$thread->channel->slug.'/'.$thread->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="text-red-400 underline">Delete Thread</button>
+                    </form>
                     @endcan
                 </div>
                 <div>
@@ -41,6 +41,13 @@
                 <div class="mb-3">
                     {{ $reply->body }}
                 </div>
+                @can('update', $reply)
+                    <form action="{{ route('reply.destroy', $reply ) }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <button class="px-4 py-2 bg-red-400 text-white rounded mt-4">Delete</button>
+                    </form>
+                @endcan
             </div>
             @endforeach
 
@@ -65,7 +72,8 @@
         <div class="card">
             <p>
                 This thread was published {{ $thread->created_at->diffForHumans() }} by
-                <a href="{{ url('profile/'.$thread->owner->name)}}"><strong>{{ $thread->owner->name }}</strong> </a>, and currently
+                <a href="{{ url('profile/'.$thread->owner->name)}}"><strong>{{ $thread->owner->name }}</strong> </a>,
+                and currently
                 has {{ $thread->replies_count }} {{ str_plural('comment',  $thread->replies_count) }}.
             </p>
         </div>
