@@ -8,13 +8,23 @@ export default {
         }
     },
     methods: {
-        update(el){
+        update(){
             axios.put(`/reply/${this.attributes.id}`, {
                 body : this.body
             }).then( res => {
                 this.editing = false
                 el.target.value = this.body
             })
+        },
+        destroy(){
+            axios
+                .delete(`/reply/${this.attributes.id}`)
+                .then(res => {
+                    document
+                        .getElementById(`reply-${this.attributes.id}`)
+                        .style.display = 'none'
+                });
+
         }
     }
 }

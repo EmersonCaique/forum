@@ -1900,7 +1900,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    update: function update(el) {
+    update: function update() {
       var _this = this;
 
       axios.put("/reply/".concat(this.attributes.id), {
@@ -1908,6 +1908,13 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this.editing = false;
         el.target.value = _this.body;
+      });
+    },
+    destroy: function destroy() {
+      var _this2 = this;
+
+      axios["delete"]("/reply/".concat(this.attributes.id)).then(function (res) {
+        document.getElementById("reply-".concat(_this2.attributes.id)).style.display = 'none';
       });
     }
   }
