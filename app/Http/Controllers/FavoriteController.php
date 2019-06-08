@@ -20,6 +20,17 @@ class FavoriteController extends Controller
             $this->fail('dont work');
         }
 
-        return back();
+        return response(['status' => true]);
+    }
+
+    public function destroy(Reply $reply)
+    {
+        try {
+            $reply->unfavorite();
+        } catch (\Exception $e) {
+            $this->fail('dont work');
+        }
+
+        return response(['status' => true]);
     }
 }

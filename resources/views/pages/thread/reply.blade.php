@@ -2,11 +2,7 @@
     <div class="w-full p-5 bg-white mb-2 mr-2 rounded border" id="reply-{{ $reply->id}}">
         <div class="mb-2 border-b pb-2 flex justify-between items-center">
             <span>{{ $reply->owner->name }} said {{ $reply->created_at->diffForHumans() }}</span>
-            <form action="{{ url('/reply/'.$reply->id.'/favorites')}}" method="post">
-                @csrf
-                <button type="submit"
-                    class="p-1 border border-blue-400 rounded  text-blue-400 text-xs">Favorite</button>
-            </form>
+            <favorite :reply="{{ $reply }}"></favorite>
         </div>
         <div class="mb-3" v-if="!editing" v-text="body"></div>
         <div v-else class="text-right">

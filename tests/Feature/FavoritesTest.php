@@ -41,4 +41,16 @@ class FavoritesTest extends TestCase
 
         $this->assertCount(1, $reply->favorites);
     }
+
+    /** @test */
+    public function an_auth_user_can_unfavorite_a_reply()
+    {
+        $this->signIn();
+        $reply = create('App\Reply', ['thread_id' => factory('App\Thread')->create()]);
+        $this->post("reply/{$reply->id}/favorites");
+        $this->assertCount(1, $reply->favorites);
+
+        $this->delete("reply/{$reply->id}/favorites");
+        $this->assertCount(0, $reply->fresh()->favorites);
+    }
 }

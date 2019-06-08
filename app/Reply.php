@@ -4,12 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\RecordActivity;
+use App\Traits\Favoritable;
 
 class Reply extends Model
 {
-    use RecordActivity;
+    use RecordActivity, Favoritable;
 
     protected $fillable = ['body'];
+    protected $appends = ['favoritesCount', 'isFavorited'];
 
     public function thread()
     {
