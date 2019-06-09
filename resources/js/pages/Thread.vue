@@ -1,5 +1,6 @@
 <script>
     import Replies from '../components/Replies'
+
     export default {
         props: ['initialRepiesCount'],
         components: {

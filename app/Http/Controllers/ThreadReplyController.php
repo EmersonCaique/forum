@@ -41,6 +41,10 @@ class ThreadReplyController extends Controller
         $reply->owner()->associate(auth()->user());
         $thread->addReply($reply);
 
+        if ($request->wantsJson()) {
+            return $reply->fresh();
+        }
+
         return back();
     }
 
