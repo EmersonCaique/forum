@@ -11,6 +11,7 @@ class Reply extends Model
     use RecordActivity, Favoritable;
 
     protected $fillable = ['body'];
+    protected $with = ['owner'];
     protected $appends = ['favoritesCount', 'isFavorited'];
 
     public function thread()
