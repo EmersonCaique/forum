@@ -1,7 +1,7 @@
 <template>
     <div class="w-full p-5 bg-white mb-2 rounded border" :id="getId">
         <div class="mb-2 border-b pb-2 flex justify-between items-center">
-            <span>{{ reply.owner.name }} said {{ reply.created_at }}</span>
+            <span>{{ reply.owner.name }} said <span v-text="ago"></span></span>
             <favorite :reply="reply"></favorite>
         </div>
         <div class="mb-3" v-if="!editing" v-text="body"></div>
@@ -25,6 +25,7 @@
 <script>
 
     import Favorite from './Favorite'
+    import  moment from 'moment'
 
     export default {
         components: { Favorite },
@@ -33,12 +34,15 @@
             return {
                 editing: false,
                 body: this.data.body,
-                reply: this.data
+                reply: this.data,
             }
         },
         computed: {
             getId(){
                 return `reply-${this.reply.id}`
+            },
+            ago(){
+                return moment(this.reply.created_at).fromNow()
             }
         },
         methods: {

@@ -4,7 +4,7 @@
     export default {
         props: ['initialRepiesCount'],
         components: {
-            Replies
+        Replies
         },
         data() {
             return {

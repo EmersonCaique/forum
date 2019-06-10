@@ -24,9 +24,7 @@ class ParticipateInForumTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this
-            ->get("thread/{$thread->channel->slug}/{$thread->id}")
-            ->assertSee($reply['body']);
+        $this->assertEquals(1, $thread->fresh()->replies_count);
     }
 
     /** @test */
@@ -61,6 +59,12 @@ class ParticipateInForumTest extends TestCase
         $this->signIn($reply->owner)
                 ->delete("reply/{$reply->id}")
                 ->assertStatus(302);
+
+        $this->assertDatabaseMissing('replies', [
+            'body' => $reply->body,
+        ]);
+
+        $this->assertEquals(0, $reply->thread->fresh()->replies_count);
     }
 
     /** @test */

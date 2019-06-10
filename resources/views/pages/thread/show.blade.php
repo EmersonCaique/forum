@@ -29,7 +29,7 @@
             </div>
 
             <div class=" flex flex-wrap">
-                <replies :data='{{ $thread->replies }}' @removed="repliesCount--"></replies>
+                <replies @removed="repliesCount--"></replies>
             </div>
 
 

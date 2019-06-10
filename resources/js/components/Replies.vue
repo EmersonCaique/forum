@@ -15,15 +15,20 @@ import Reply from './Reply.vue'
 import NewReply from './NewReply'
 
 export default {
-    props: ['data'],
     components: { Reply, NewReply },
     data(){
         return {
-            items: this.data,
+            items: [],
             url: `${location.pathname}/replies`
         }
     },
+    created(){
+
+    },
     methods: {
+        fecth(){
+
+        },
         remove(index){
             this.items.splice(index, 1)
             this.$emit('removed')
