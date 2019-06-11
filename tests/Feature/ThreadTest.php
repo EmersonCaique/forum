@@ -111,6 +111,32 @@ class ThreadTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function a_thread_can_be_subscribed()
+    {
+        $thread = create('App\Thread');
+
+        $this->signIn();
+
+        $thread->subscribe();
+
+        $this->assertEquals(1, $thread->subscriptions()->where('user_id', auth()->id())->count());
+    }
+
+    /** @test */
+    public function a_thread_can_be_unsubscribed()
+    {
+        $thread = create('App\Thread');
+
+        $thread->subscribe($userId = 1);
+
+        $this->assertEquals(1, $thread->subscriptions()->where('user_id', $userId)->count());
+
+        $thread->unsubscribe($userId = 1);
+
+        $this->assertEquals(0, $thread->subscriptions->fresh()->where('user_id', $userId)->count());
+    }
+
     public function publishThread($overrides = [])
     {
         $this->signIn();
