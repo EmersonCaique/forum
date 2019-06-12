@@ -13,12 +13,12 @@ class SubscribeToThreadTest extends TestCase
     /** @test */
     public function a_user_can_subscribe_to_thread()
     {
-        $this->withoutExceptionHandling();
         $this->signIn();
+
         $thread = create('App\Thread');
 
-        $this->post($r = route('thread.subscription.store', [$thread->channel, $thread]));
+        $this->post(route('thread.subscription.store', [$thread->channel, $thread]));
 
-        $this->assertCount(1, $thread->fresh()->subscriptions);
+        $this->assertCount(1, $thread->subscriptions);
     }
 }

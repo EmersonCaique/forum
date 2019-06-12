@@ -37,6 +37,8 @@ class Thread extends Model
         $this->subscriptions()->create([
             'user_id' => $userId ?: auth()->id(),
         ]);
+
+        return $this;
     }
 
     public function unsubscribe($userId = null)
@@ -49,9 +51,17 @@ class Thread extends Model
         return $this->hasMany(ThreadSubscription::class);
     }
 
-    public function addReply(Reply $reply)
+    public function addReply($reply)
     {
-        $this->replies()->save($reply);
+        $reply = $this->replies()->save($reply);
+
+        $this
+            ->subscriptions
+            ->filter(function ($subscription) use ($reply) {
+                return $subscription->user_id != $reply->user_id;
+            })->each->notify($reply);
+
+        return $reply;
     }
 
     public function channel()
