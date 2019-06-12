@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ThreadSubscription;
 use Illuminate\Http\Request;
+use App\Thread;
 
 class ThreadSubscriptionController extends Controller
 {
@@ -14,7 +15,6 @@ class ThreadSubscriptionController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -24,62 +24,62 @@ class ThreadSubscriptionController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($channelId, Thread $thread)
     {
-        //
+        $thread->subscribe();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ThreadSubscription  $threadSubscription
+     * @param \App\ThreadSubscription $threadSubscription
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(ThreadSubscription $threadSubscription)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ThreadSubscription  $threadSubscription
+     * @param \App\ThreadSubscription $threadSubscription
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(ThreadSubscription $threadSubscription)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ThreadSubscription  $threadSubscription
+     * @param \Illuminate\Http\Request $request
+     * @param \App\ThreadSubscription  $threadSubscription
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ThreadSubscription $threadSubscription)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ThreadSubscription  $threadSubscription
+     * @param \App\ThreadSubscription $threadSubscription
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(ThreadSubscription $threadSubscription)
     {
-        //
     }
 }
