@@ -33,9 +33,16 @@ class ThreadSubscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store($channelId, Thread $thread)
+    public function store($channelId, Thread $thread, Request $request)
     {
-        $thread->subscribe();
+        try {
+            $thread->subscribe();
+
+            if ($request->wantsJson()) {
+                return response(['status' => true], 200);
+            }
+        } catch (\Exception $e) {
+        }
     }
 
     /**
@@ -79,7 +86,15 @@ class ThreadSubscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ThreadSubscription $threadSubscription)
+    public function destroy($channelId, Thread $thread, Request $request)
     {
+        try {
+            $thread->unsubscribe();
+
+            if ($request->wantsJson()) {
+                return response(['status' => true], 200);
+            }
+        } catch (\Exception $e) {
+        }
     }
 }

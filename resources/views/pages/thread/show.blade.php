@@ -35,7 +35,7 @@
 
         </div>
 
-        <div class="w-1/4 p-5 bg-white mb-2 shadow rounded">
+        <div class="w-1/4 p-5 bg-white mb-2 shadow rounded h-full">
             <div class="card">
                 <p>
                     This thread was published {{ $thread->created_at->diffForHumans() }} by
@@ -44,6 +44,8 @@
                     and currently
                     has <span v-text="repliesCount"></span> {{ str_plural('comment',  $thread->replies_count) }}.
                 </p>
+
+                <subscribe-button :active="{{ json_encode($thread->isSubscribedTo) }}"></subscribe-button>
             </div>
         </div>
 

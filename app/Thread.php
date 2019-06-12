@@ -9,6 +9,8 @@ class Thread extends Model
 {
     protected $guarded = [];
 
+    protected $appends = ['isSubscribedTo'];
+
     use RecordActivity;
 
     public static function boot()
@@ -60,5 +62,12 @@ class Thread extends Model
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);
+    }
+
+    public function getIsSubscribedToAttribute()
+    {
+        return $this->subscriptions()
+            ->where('user_id', auth()->id())
+            ->exists();
     }
 }
