@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Notifications\DatabaseNotification;
 
 class NotificationTest extends TestCase
 {
@@ -14,7 +15,6 @@ class NotificationTest extends TestCase
     public function a_notification_is_prepared_when_a_subscriber_thread_recives_new_reply_that_is_not_by_the_current_user()
     {
         $this->signIn();
-
         $thread = create('App\Thread')->subscribe();
         $this->assertCount(0, auth()->user()->notifications);
 
@@ -31,9 +31,7 @@ class NotificationTest extends TestCase
     public function a_user_can_fecth_their_unred_notificaitions()
     {
         $this->signIn();
-
-        $thread = create('App\Thread')->subscribe();
-        $thread->addReply(make('App\Reply'));
+        create(DatabaseNotification::class);
 
         $user = auth()->user();
 
@@ -47,8 +45,7 @@ class NotificationTest extends TestCase
     {
         $this->signIn();
 
-        $thread = create('App\Thread')->subscribe();
-        $thread->addReply(make('App\Reply'));
+        create(DatabaseNotification::class);
 
         $user = auth()->user();
 
