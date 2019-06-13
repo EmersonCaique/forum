@@ -24,7 +24,17 @@
         [v-cloak] {
             display: none;
         }
+
     </style>
+
+      <!-- Scripts -->
+      <script>
+            window.App = {!! json_encode([
+                'csrfToken' => csrf_token(),
+                'user' => Auth::user(),
+                'signedIn' => Auth::check()
+            ]) !!};
+        </script>
 </head>
 
 <body class="bg-gray-100">
@@ -33,16 +43,22 @@
             <div>
                 <a href="{{ url('/home') }}" class="uppercase">Forum</a>
                 <a href="{{ url('thread') }}" class="ml-5">All Threads</a>
+
                 @auth
-                    <a href="{{ url('/thread?popular=1') }}" class="ml-5">Popular Threads</a>
-                    <a href="{{ url('/thread?by='.auth()->user()->name) }}" class="ml-5">My Threads</a>
-                    <a href="{{ url('/thread/create') }}" class="ml-5">New Thread</a>
-                    @endauth
+                <a href="{{ url('/thread?popular=1') }}" class="ml-5">Popular Threads</a>
+                <a href="{{ url('/thread?by='.auth()->user()->name) }}" class="ml-5">My Threads</a>
+                <a href="{{ url('/thread/create') }}" class="ml-5">New Thread</a>
+                @endauth
             </div>
+
+
 
             @auth
 
-                <span>{{ auth()->user()->name }}</span>
+            <div class="flex ">
+                <user-notifications></user-notifications>
+                <span class="ml-3">{{ auth()->user()->name }}</span>
+            </div>
 
             @endauth
 
