@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\RecordActivity;
+use App\Providers\ThreadHasNewReply;
 
 class Thread extends Model
 {
@@ -55,11 +56,7 @@ class Thread extends Model
     {
         $reply = $this->replies()->save($reply);
 
-        $this
-            ->subscriptions
-            ->filter(function ($subscription) use ($reply) {
-                return $subscription->user_id != $reply->user_id;
-            })->each->notify($reply);
+        ThreadHasNewReply::dispatch($this, $reply);
 
         return $reply;
     }
