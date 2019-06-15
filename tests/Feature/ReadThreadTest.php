@@ -31,16 +31,6 @@ class ReadThreadTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_read_replies_that_are_associated_with_a_thread()
-    {
-        $reply = create('App\Reply', ['thread_id' => $thread = create('App\Thread')]);
-        $response = $this->get("thread/{$thread->channel->slug}/{$thread->id}/replies");
-
-        $this->withoutExceptionHandling();
-        $response->assertSee($reply->body);
-    }
-
-    /** @test */
     public function a_user_can_filter_threads_according_to_a_channel()
     {
         $threadInChannel = create('App\Thread');
@@ -81,10 +71,9 @@ class ReadThreadTest extends TestCase
     public function a_user_can_filter_threads_by_those_are_unanswered()
     {
         $thread = create('App\Thread');
-        create('App\Reply', ['thread_id' => $thread->id], 3);
 
         $response = $this->getJson('thread?unanswered=1')->json();
 
-        $this->assertEquals(1, $response);
+        $this->assertCount(1, $response);
     }
 }

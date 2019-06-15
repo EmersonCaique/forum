@@ -13,9 +13,10 @@ class ProfileTest extends TestCase
     /** @test */
     public function a_user_has_a_profile()
     {
-        $user = create('App\User');
-        $this->get("profile/{$user->name}")
-            ->assertSee($user->name);
+        $this->signIn();
+
+        $this->get('profile/'.auth()->user()->name)
+            ->assertSee(auth()->user()->name);
     }
 
     /** @test */
